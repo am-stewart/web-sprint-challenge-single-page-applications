@@ -1,8 +1,4 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -35,10 +31,48 @@
   to {
     transform: rotate(360deg);
   }
+} */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2%;
+}
+.nav-links {
+  width: 15%;
+  display: flex;
+  justify-content: space-evenly;
+}
+a {
+  text-decoration: none;
+  color: #b21807;
+  font-size: 16px;
+  padding: 2%;
 }
 
-h1 {
+label {
+  padding: .25%;
+}
+
+button {
+  width: 15%;
+  margin: 2%;
+}
+
+.toppings {
   display: flex;
-  justify-content: center;
-  color: 'orange';
+  flex-direction: column;
+}
+
+#pizza-form {
+  border: 1px solid black;
+  margin: 5px 40px 5px 40px;
+}
+
+.item-container {
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #b21807;
 }

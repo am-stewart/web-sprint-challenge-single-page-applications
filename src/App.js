@@ -3,9 +3,9 @@ import { Link, Route, Switch } from 'react-router-dom';
 import * as yup from 'yup';
 import formSchema from './formSchema';
 import axios from 'axios';
+import './App.css';
 
 ///components
-import Home from './Home';
 import Form from './Form';
 import Item from './Item';
 
@@ -77,11 +77,14 @@ useEffect(() => {
 
   return (
     <div className='container'>
-      <nav className='nav-links'>
+      <header>
         <h1>Lambda Eats</h1>
-        <Link to='/'>Home</Link>
-        <Link id='order-pizza' to='/pizza'>Order Form</Link>
-      </nav>
+        <nav className='nav-links'>
+          <Link id='home' to='/'>Home</Link>
+          <Link id='order-pizza' to='/pizza'>Order Form</Link>
+        </nav>
+      </header>
+      <div className='body-container'>
       <Switch>
         <Route path='/pizza'>
           <Form 
@@ -92,6 +95,7 @@ useEffect(() => {
             errors={formErrors}
             details={order}
           />
+          <h3>Your current order...</h3>
           {
             order.map(item => {
               return (
@@ -100,10 +104,8 @@ useEffect(() => {
             })
           }
         </Route>
-        <Route path='/'>
-          <Home />
-        </Route>
       </Switch>
+      </div>
     </div>
   );
 };

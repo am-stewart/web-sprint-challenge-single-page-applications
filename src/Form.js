@@ -1,8 +1,8 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import './App.css';
 
 export default function Form(props) {
-    const { values, submit, change, disabled, errors, details } = props
+    const { values, submit, change, disabled, errors } = props
 
     const onSubmit = evt => {
         evt.preventDefault()
@@ -24,7 +24,7 @@ export default function Form(props) {
                 <div>{errors.name}</div>
                 <div>{errors.size}</div>
             </div>
-
+        <div className='label-container'>
             <label>Name
                 <input id='name-input' 
                     name='name'
@@ -48,8 +48,8 @@ export default function Form(props) {
                     <option value='Extra large'>Extra Large</option>
                 </select>
             </label>
-
-            <label>Toppings
+        <div className='toppings'>
+            <h4>Toppings</h4>
               <label>Pepperoni
                 <input 
                     type='checkbox'
@@ -82,8 +82,7 @@ export default function Form(props) {
                     onChange={onChange}
                   />
               </label>
-            </label>
-
+              </div>
             <label>Special
                 <input id='special-text'
                     name='special'
@@ -93,10 +92,9 @@ export default function Form(props) {
                     onChange={onChange}
                 />
             </label>
-
             <button id='order-button' disabled={disabled}>Add to Order</button>
+            </div>        
         </form>
-        <h3> Your Current Order...</h3>
       </div>
     )
 }
