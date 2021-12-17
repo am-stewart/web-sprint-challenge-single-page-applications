@@ -10,7 +10,7 @@ describe('Lambda Eats App', () => {
     const peppersBox = () => cy.get('input[name=peppers]');
     const onionsBox = () => cy.get('input[name=onions]');
     const specialInput = () => cy.get('input[name=special]');
-    const submitButton = () => cy.get('button[id="order-button"]');
+    const addButton = () => cy.get('button[id="order-button"]');
 
     it('sanity check to make sure tests work', () => {
         expect(1+2).to.equal(3);
@@ -25,7 +25,7 @@ describe('Lambda Eats App', () => {
         peppersBox().should('exist');
         onionsBox().should('exist');
         specialInput().should('exist');
-        cy.contains('Submit Order').should('exist');
+        cy.contains('Add to Order').should('exist');
     })
 
 describe('Can type in inputs and select toppings', () => {
@@ -34,7 +34,7 @@ describe('Can type in inputs and select toppings', () => {
     })
 
     it('submit button starts as disabled', () => {
-        submitButton().should('be.disabled');
+        addButton().should('be.disabled');
     })
 
     it('can type in name input', () => {
@@ -55,16 +55,13 @@ describe('Can submit order form', () => {
     it('submit button enables when required fields are completed', () => {
         nameInput().type('John Doe');
         sizeInput().select('Small');
-        submitButton().should('not.be.disabled');
+        addButton().should('not.be.disabled');
     })
     it('can click button to submit order', () => {
         nameInput().type('John Doe');
         sizeInput().select('Small');
-        submitButton().click();
+        addButton().click();
     })
 })
 })
-
-
-
-}) //THIS IS THE END
+})

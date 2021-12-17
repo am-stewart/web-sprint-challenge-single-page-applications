@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, Route, Switch } from 'react-router-dom';
 import * as yup from 'yup';
-import formSchema from './formSchema'
+import formSchema from './formSchema';
 import axios from 'axios';
 
 ///components
-import Form from './Form'
+import Home from './Home';
+import Form from './Form';
+import Item from './Item';
 
 const initialFormValues = {
   name: '',
@@ -27,10 +29,11 @@ const initialFormErrors = {
   special: '',
 }
 
+const initialOrder = []
 const initialDisabled = true
 
 const App = () => {
-const [order, setOrder] = useState([])
+const [order, setOrder] = useState(initialOrder)
 const [formValues, setFormValues] = useState(initialFormValues)
 const [formErrors, setFormErrors] = useState(initialFormErrors)
 const [disabled, setDisabled] = useState(initialDisabled)
@@ -38,7 +41,7 @@ const [disabled, setDisabled] = useState(initialDisabled)
 const postNewOrder = newOrder => {
   axios.post('https://reqres.in/api/orders', newOrder)
     .then(resp => {
-      setOrder(resp.data)
+      setOrder([resp.data, ...order]);
     }).catch(error => console.log(error))
     .finally(() => setFormValues(initialFormValues))
 }
@@ -62,7 +65,8 @@ const formSubmit = () => {
   const newOrder = {
     name: formValues.name.trim(),
     size: formValues.size.trim(),
-    toppings: ['pepperoni', 'pineapple', 'peppers', 'onions'].filter(topping => !!formValues[topping])
+    toppings: ['pepperoni', 'pineapple', 'peppers', 'onions'].filter(topping => !!formValues[topping]),
+    special: formValues.special
   }
   postNewOrder(newOrder);
 }
@@ -86,7 +90,18 @@ useEffect(() => {
             submit={formSubmit}
             disabled={disabled}
             errors={formErrors}
+            details={order}
           />
+          {
+            order.map(item => {
+              return (
+                <Item key={item.id} details={item}/>
+              )
+            })
+          }
+        </Route>
+        <Route path='/'>
+          <Home />
         </Route>
       </Switch>
     </div>

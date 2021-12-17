@@ -1,7 +1,8 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 export default function Form(props) {
-    const { values, submit, change, disabled, errors } = props
+    const { values, submit, change, disabled, errors, details } = props
 
     const onSubmit = evt => {
         evt.preventDefault()
@@ -15,6 +16,7 @@ export default function Form(props) {
     }
 
     return (
+      <div className='form-container'>
         <form id='pizza-form' onSubmit={onSubmit}>
             <h2>Build a Pizza</h2>
 
@@ -92,7 +94,9 @@ export default function Form(props) {
                 />
             </label>
 
-            <button id='order-button' disabled={disabled}>Submit Order</button>
+            <button id='order-button' disabled={disabled}>Add to Order</button>
         </form>
+        <h3> Your Current Order...</h3>
+      </div>
     )
 }
